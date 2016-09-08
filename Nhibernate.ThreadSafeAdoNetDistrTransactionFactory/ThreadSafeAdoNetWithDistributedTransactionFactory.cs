@@ -7,7 +7,7 @@ using NHibernate.Engine.Transaction;
 using NHibernate.Impl;
 using NHibernate.Transaction;
 
-namespace Nhibernate.ThreadSafeAdoNetDistrTransactionFactory
+namespace NHibernate
 {
     public class ThreadSafeAdoNetWithDistributedTransactionFactory : ITransactionFactory
     {

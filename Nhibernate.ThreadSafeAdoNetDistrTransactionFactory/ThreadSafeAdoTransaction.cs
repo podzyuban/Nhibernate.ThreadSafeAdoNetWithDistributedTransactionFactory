@@ -1,9 +1,11 @@
 using System;
 using System.Data;
-using NHibernate;
 using NHibernate.Transaction;
+using NHibernate;
+using NHibernate.Engine;
 
-namespace Nhibernate.ThreadSafeAdoNetDistrTransactionFactory
+
+namespace NHibernate
 {
     internal class ThreadSafeAdoTransaction : ITransaction
     {
@@ -62,7 +64,7 @@ namespace Nhibernate.ThreadSafeAdoNetDistrTransactionFactory
             this._source.Begin(isolationLevel);
         }
 
-        private void WithLock(Action action)
+        private void WithLock(System.Action action)
         {
             WithLock<object>(() =>
             {
