@@ -21,7 +21,15 @@ namespace NHibernate
 
         public ITransaction CreateTransaction(ISessionImplementor session)
         {
-            return new ThreadSafeAdoTransaction(new AdoTransaction(session), session);
+            var adoTransaction = new AdoTransaction(session);
+
+            if (System.Transactions.Transaction.Current == null)
+            {
+                return adoTransaction;
+            }
+
+            return new ThreadSafeAdoTransaction(adoTransaction, session);
+
         }
 
         public void EnlistInDistributedTransactionIfNeeded(ISessionImplementor session)
